@@ -1,0 +1,225 @@
+{
+  "info": {
+    "name": "Aiye - Planetary Operating Room API",
+    "description": "Complete API collection for Aiye backend system. Includes organ diagnostics, payment processing, image verification, and quota management endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Organs",
+      "item": [
+        {
+          "name": "Get All Organs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/organs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "organs"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Single Organ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/organs/{{organ_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "organs",
+                "{{organ_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Diagnose Single Organ",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/organs/{{organ_id}}/diagnose",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "organs",
+                "{{organ_id}}",
+                "diagnose"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Diagnose All Organs",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/organs/diagnose-all",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "organs",
+                "diagnose-all"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Quota Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/organs/quota-status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "organs",
+                "quota-status"
+              ]
+            },
+            "description": "Get Gemini API quota status including daily calls used, remaining calls, cache size, and rate limiting information"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vials (Payments)",
+      "item": [
+        {
+          "name": "Initialize Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"organId\": \"{{organ_id}}\",\n  \"amount\": 100,\n  \"currency\": \"USD\",\n  \"email\": \"donor@example.com\",\n  \"name\": \"John Doe\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/vials/initialize",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "vials",
+                "initialize"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Vials by Organ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/vials/{{organ_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "vials",
+                "{{organ_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Verification",
+      "item": [
+        {
+          "name": "Verify Restoration Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"organId\": \"{{organ_id}}\",\n  \"imageBase64\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8A/9k=\",\n  \"ngoName\": \"Green Earth Initiative\",\n  \"description\": \"Reforestation project showing new tree growth in Amazon region\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/verify",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "verify"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "organ_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
