@@ -215,7 +215,7 @@ class DiagnosticService {
   }
 
   /**
-   * Generate diagnosis using Gemini 3 Flash with quota management
+   * Generate diagnosis using Gemini 3 Flash Preview with quota management
    * Implements caching and rate limiting to stay within free tier limits
    * @param {Object} metrics - Environmental metrics data
    * @param {string} organType - Type of organ (Lungs/Veins/Skin)
@@ -265,7 +265,7 @@ class DiagnosticService {
       );
 
       const model = this.genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
+        model: "gemini-3-flash-preview",
         generationConfig: {
           temperature: 0.7,
           topP: 0.95,
