@@ -275,25 +275,43 @@ class DiagnosticService {
       });
 
       // Construct medical-style prompt
-      const prompt = `You are a planetary physician examining Earth as a living organism. Analyze the following environmental data and provide a visceral medical diagnosis.
+      const prompt = `You are a doctor treating Planet Earth as if it were a human patient. Analyze the environmental data below and tell us how the "patient" is feeling in plain, vivid language.
 
 Organ Type: ${organType}
 Environmental Metrics: ${JSON.stringify(metrics, null, 2)}
 
-Based on this data, provide a diagnosis in the following JSON format ONLY (no additional text):
+Based on this data, provide a diagnosis in the following JSON format ONLY:
 {
-  "diagnosis": "A short, visceral medical brief (2-3 sentences) describing the organ's condition using medical terminology",
-  "status": "INFLAMED or HEALTHY"
+  "diagnosis": "A 2-3 sentence check-up report. Use relatable body metaphors (like breathing, blood flow, or skin rashes) instead of complex medical jargon.",
+  "status": "SICK or HEALTHY"
 }
 
 Guidelines:
-- For LUNGS: Deforestation = respiratory distress. High alerts = INFLAMED, low alerts = HEALTHY
-- For VEINS: Ocean acidification = circulatory issues. pH < 8.0 = INFLAMED, pH >= 8.1 = HEALTHY
-- For SKIN: Air pollution = dermatological damage. High AQI/PM2.5 = INFLAMED, low values = HEALTHY
-- Use medical language: "acute inflammation", "chronic degradation", "tissue regeneration", etc.
-- Be dramatic but scientifically grounded
+- For LUNGS (Forests): High alerts mean the Earth is "gasping for air" or has "clogged airways." Low alerts mean "deep, clear breaths."
+- For VEINS (Oceans/Rivers): Low pH means the "blood" is becoming "toxic or acidic," causing "stiff circulation."
+- For SKIN (Air/Atmosphere): High pollution means the Earth has a "feverish rash" or "irritated pores." 
+- Tone: Be descriptive and serious, but use words a 10-year-old would understand. Avoid words like "acute," "pathological," or "degradation."
 
 Return ONLY the JSON object, nothing else.`;
+//       const prompt = `You are a planetary physician examining Earth as a living organism. Analyze the following environmental data and provide a visceral medical diagnosis.
+
+// Organ Type: ${organType}
+// Environmental Metrics: ${JSON.stringify(metrics, null, 2)}
+
+// Based on this data, provide a diagnosis in the following JSON format ONLY (no additional text):
+// {
+//   "diagnosis": "A short, visceral medical brief (2-3 sentences) describing the organ's condition using medical terminology",
+//   "status": "INFLAMED or HEALTHY"
+// }
+
+// Guidelines:
+// - For LUNGS: Deforestation = respiratory distress. High alerts = INFLAMED, low alerts = HEALTHY
+// - For VEINS: Ocean acidification = circulatory issues. pH < 8.0 = INFLAMED, pH >= 8.1 = HEALTHY
+// - For SKIN: Air pollution = dermatological damage. High AQI/PM2.5 = INFLAMED, low values = HEALTHY
+// - Use medical language: "acute inflammation", "chronic degradation", "tissue regeneration", etc.
+// - Be dramatic but scientifically grounded
+
+// Return ONLY the JSON object, nothing else.`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
