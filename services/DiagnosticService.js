@@ -501,7 +501,9 @@ Return ONLY the JSON object, nothing else.`;
       if (organ.type === "Lungs" && metrics.alertCount) {
         healthScore = Math.max(0, 100 - metrics.alertCount / 10);
       } else if (organ.type === "Veins" && metrics.pH) {
-        healthScore = Math.min(100, (metrics.pH - 7.5) * 200);
+        // pH 7 is optimal (neutral). Score decreases as pH moves away from 7
+        const deviation = Math.abs(metrics.pH - 7);
+        healthScore = Math.max(0, 100 - deviation * 14.3);
       } else if (organ.type === "Skin" && metrics.aqi) {
         healthScore = Math.max(0, 100 - metrics.aqi * 15);
       }
