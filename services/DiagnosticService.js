@@ -418,7 +418,7 @@ Return ONLY the JSON object, nothing else.`;
           severity = "HIGH";
           diagnosis = `ACUTE ACIDIFICATION: pH level ${pH.toFixed(3)} detected in ${metrics.location}. Circulatory system under significant stress. ${metrics.acidificationLevel} acidification level compromising vascular health. Immediate buffering intervention needed.`;
         } else if (pH < 8.1) {
-          status = "INFLAMED";
+          status = "MODERATE";
           severity = "MODERATE";
           diagnosis = `EARLY ACIDOSIS: pH ${pH.toFixed(3)} in ${metrics.location} indicates moderate circulatory stress. ${metrics.acidificationLevel} acidification detected. Preventive measures recommended.`;
         } else {
